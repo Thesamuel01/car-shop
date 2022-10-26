@@ -2,7 +2,7 @@ import * as sinon from 'sinon';
 
 import { ICar } from "../../interfaces/ICar";
 import { IService } from "../../interfaces/IService";
-import { carMockWithId, carsMock } from '../mocks/carMocks';
+import { carMockWithId, carsMock, carUpdatedMock } from '../mocks/carMocks';
 
 export default class CarServiceFake implements IService<ICar> {
   async create(obj: unknown): Promise<ICar> {
@@ -16,7 +16,7 @@ export default class CarServiceFake implements IService<ICar> {
     return carsMock;
   }
   async update(_id: string, obj: unknown): Promise<ICar> {
-    return carMockWithId;
+    return carUpdatedMock;
   }
   async delete(_id: string): Promise<ICar> {
     return carMockWithId;
