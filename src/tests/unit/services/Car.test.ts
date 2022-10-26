@@ -3,7 +3,7 @@ import chai from 'chai';
 
 import CarModel from '../../../models/Car';
 import CarService from '../../../services/Car';
-import { carMock, carMockWithId, carUpdateDataMock, carUpdatedMock } from '../../mocks/carMocks';
+import { carMock, carMockWithId, carsMock, carUpdateDataMock, carUpdatedMock } from '../../mocks/carMocks';
 import { ZodError } from 'zod';
 import { ErrorTypes } from '../../../errors/catalog';
 
@@ -19,7 +19,7 @@ describe('Car Service', () => {
 
   before(() => {
     sinon.stub(carModel, 'create').resolves(carMockWithId);
-    sinon.stub(carModel, 'read').resolves([{ ...carMockWithId }]);
+    sinon.stub(carModel, 'read').resolves(carsMock);
 
     readOneStub = sinon.stub(carModel, 'readOne')
     updateStub = sinon.stub(carModel, 'update')
@@ -58,7 +58,7 @@ describe('Car Service', () => {
 		it('Success', async () => {
 			const carsFound = await carService.read();
 
-			expect(carsFound).to.be.deep.equal([{ ...carMockWithId }]);
+			expect(carsFound).to.be.deep.equal(carsMock);
 		});
   });
 
