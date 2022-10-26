@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import 'express-async-errors';
 
-import CarController from './controllers/CarController';
+import CarController from './controllers/Car';
 import CarModel from './models/Car';
-import CarService from './services/CarService';
+import CarService from './services/Car';
 
 const routes = Router();
 
