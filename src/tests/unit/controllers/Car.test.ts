@@ -45,4 +45,17 @@ describe('Car Controller', () => {
       expect((res.json as sinon.SinonStub).calledWith(carsMock)).to.be.true;
     });
   });
+
+  describe('getById', () => {
+    const carService = new CarServiceFake();
+    const carController = new CarController(carService);
+
+    it('Success', async () => {
+      req.params = { id: carMockWithId._id };
+      await carController.getAll(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(carsMock)).to.be.true;
+    });
+  });
 });
