@@ -15,5 +15,6 @@ routes.post('/cars', carController.create);
 routes.get('/cars', carController.getAll);
 routes.get('/cars/:id', carController.getById);
 routes.put('/cars/:id', carController.update);
+routes.delete('/cars/:id', carController.destroy);
 
 export default routes;
