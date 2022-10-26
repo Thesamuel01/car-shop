@@ -53,10 +53,10 @@ describe('Car Controller', () => {
 
     it('Success', async () => {
       req.params = { id: carMockWithId._id };
-      await carController.getAll(req, res);
+      await carController.getById(req, res);
 
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
-      expect((res.json as sinon.SinonStub).calledWith(carsMock)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(carMockWithId)).to.be.true;
     });
   });
 
