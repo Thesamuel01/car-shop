@@ -2,20 +2,20 @@ import * as sinon from 'sinon';
 import chai from 'chai';
 import { Model } from 'mongoose';
 
-import CarModel from '../../../models/Car';
-import { carMock, carMockWithId, carUpdateDataMock, carUpdatedMock } from '../../mocks/carMocks';
+import MotorcycleModel from '../../../models/Motorcycle';
+import { motorcycleMock, motorcycleMockWithId, motorcycleUpdateDataMock, motorcycleUpdatedMock } from '../../mocks/motorcycleMocks';
 
 const { expect } = chai;
 
-describe('Car Model', () => {
-  const carModel = new CarModel();
+describe('Motorcycle Model', () => {
+  const motorcyleModel = new MotorcycleModel();
   let findByIdStub: sinon.SinonStub;
   let findByIdAndUpdateStub: sinon.SinonStub;
   let findByIdAndDeleteStub: sinon.SinonStub;
 
   before(() => {
-    sinon.stub(Model, 'create').resolves(carMockWithId);
-    sinon.stub(Model, 'find').resolves([{ ...carMock }]);
+    sinon.stub(Model, 'create').resolves(motorcycleMockWithId);
+    sinon.stub(Model, 'find').resolves([{ ...motorcycleMock }]);
 
     findByIdStub = sinon.stub(Model, 'findById')
     findByIdAndUpdateStub = sinon.stub(Model, 'findByIdAndUpdate')
@@ -33,34 +33,34 @@ describe('Car Model', () => {
 
   describe('create', () => {
     it('successfully created', async () => {
-			const newCar = await carModel.create(carMock);
+			const newMotorcycle = await motorcyleModel.create(motorcycleMock);
 
-			expect(newCar).to.be.deep.equal(carMockWithId);
+			expect(newMotorcycle).to.be.deep.equal(motorcycleMockWithId);
 		});
   });
 
   describe('read', () => {
     it('successfully found', async () => {
-			const carsFound = await carModel.read();
+			const motorcyclesFound = await motorcyleModel.read();
 
-			expect(carsFound).to.be.deep.equal([carMock]);
+			expect(motorcyclesFound).to.be.deep.equal([motorcycleMock]);
 		});
   });
 
   describe('readOne', () => {
     it('successfully found', async () => {
-      findByIdStub.resolves(carMockWithId);
+      findByIdStub.resolves(motorcycleMockWithId);
 
-			const carFound = await carModel.readOne('62cf1fc6498565d94eba52cd');
+			const motorcycleFound = await motorcyleModel.readOne('62cf1fc6498565d94eba52cd');
 
-			expect(carFound).to.be.deep.equal(carMockWithId);
+			expect(motorcycleFound).to.be.deep.equal(motorcycleMockWithId);
 		});
 
     it('_id not found', async () => {
       findByIdStub.resolves(null);
 
 			try {
-				await carModel.readOne('098wrong765ID');
+				await motorcyleModel.readOne('098wrong765ID');
 			} catch (error: any) {
 				expect(error.message).to.be.eq('InvalidMongoId');
 			}
@@ -69,18 +69,18 @@ describe('Car Model', () => {
 
   describe('update', () => {
     it('successfully update', async () => {
-      findByIdAndUpdateStub.resolves(carUpdatedMock);
+      findByIdAndUpdateStub.resolves(motorcycleUpdatedMock);
 
-			const carUpdated = await carModel.update('62cf1fc6498565d94eba52cd', { ...carUpdateDataMock });
+			const motorcycleUpdated = await motorcyleModel.update('62cf1fc6498565d94eba52cd', { ...motorcycleUpdateDataMock });
 
-			expect(carUpdated).to.be.deep.equal(carUpdatedMock);
+			expect(motorcycleUpdated).to.be.deep.equal(motorcycleUpdatedMock);
 		});
 
     it('_id not found', async () => {
       findByIdAndUpdateStub.resolves(null);
 
 			try {
-				await carModel.update('098wrong765ID', { ...carUpdateDataMock });
+				await motorcyleModel.update('098wrong765ID', { ...motorcycleUpdateDataMock });
 			} catch (error: any) {
 				expect(error.message).to.be.eq('InvalidMongoId');
 			}
@@ -89,18 +89,18 @@ describe('Car Model', () => {
 
   describe('delete', () => {
     it('successfully delete', async () => {
-      findByIdAndDeleteStub.resolves(carMockWithId);
+      findByIdAndDeleteStub.resolves(motorcycleMockWithId);
 
-			const carDeleted = await carModel.delete('62cf1fc6498565d94eba52cd');
+			const motorcycleDeleted = await motorcyleModel.delete('62cf1fc6498565d94eba52cd');
 
-			expect(carDeleted).to.be.deep.equal(carMockWithId);
+			expect(motorcycleDeleted).to.be.deep.equal(motorcycleMockWithId);
 		});
 
     it('_id not found', async () => {
       findByIdAndDeleteStub.resolves(null);
 
 			try {
-				await carModel.delete('098wrong765ID');
+				await motorcyleModel.delete('098wrong765ID');
 			} catch (error: any) {
 				expect(error.message).to.be.eq('InvalidMongoId');
 			}
