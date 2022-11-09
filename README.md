@@ -75,6 +75,19 @@ npm start
 cd car-shop
 docker-compose up -d
 ```
+### Entering into bash terminal from Node container.
+```
+docker exec -it car_shop bash
+```
+
+### Install project dependencies
+```
+npm install
+```
+
+### Run node server.
+```
+npm run dev
+```
 
 # API Documentation
- - # 🚧 em construção 🚧
