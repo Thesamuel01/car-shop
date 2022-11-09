@@ -65,7 +65,7 @@ npm install
 
 ### Run node server.
 ```
-npm start
+npm run dev
 ```
 
 ## Running with docker
